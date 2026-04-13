@@ -1,0 +1,103 @@
+/* === CSS Variables (Light / Dark) === */
+:root {
+  --bg:       #faf9f6;
+  --text:     #1a1714;
+  --muted:    #9c9189;
+  --surface:  #ffffff;
+  --border:   rgba(247,186,94,0.4);
+  --dot-bg:   rgba(26,23,20,0.09);
+}
+
+html.dark {
+  --bg:       #111010;
+  --text:     #f0ece6;
+  --muted:    #6b6460;
+  --surface:  #1c1917;
+  --border:   rgba(247,186,94,0.22);
+  --dot-bg:   rgba(240,236,230,0.08);
+}
+
+/* === Global === */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Grain texture */
+.grain {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 50;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px;
+}
+
+/* === Theme Toggle Button === */
+.theme-btn {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s, background-color 0.35s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.theme-btn:hover {
+  border-color: #f7ba5e;
+  color: var(--text);
+  transform: rotate(20deg) scale(1.05);
+  box-shadow: 0 4px 14px rgba(247,186,94,0.2);
+}
+
+/* === CTA Button === */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 34px;
+  border: 1px solid #f7ba5e;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-decoration: none;
+  background: transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: #f7ba5e;
+  transform: translateX(-101%);
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  border-radius: 100px;
+  z-index: 0;
+}
+
+.cta-btn span, .cta-btn svg {
+  position: relative; z-index: 1;
+}
+
+.cta-btn:hover::before { transform: translateX(0); }
+.cta-btn:hover {
+  color: #1a1714;
+  box-shadow: 0 8px 32px rgba(247,186,94,0.35);
+  transform: translateY(-2px);
+}
+
+.arrow-icon { transition: transform 0.3s ease; }
+.cta-btn:hover .arrow-icon { transform: translateX(4px); }

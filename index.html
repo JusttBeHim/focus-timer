@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flow State</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              gold: '#f7ba5e',
+              ink: '#1a1714',
+              parchment: '#faf9f6',
+              muted: '#9c9189',
+            },
+            fontFamily: {
+              display: ['"Cormorant Garamond"', 'serif'],
+              body: ['"DM Sans"', 'sans-serif'],
+            },
+            animation: {
+              'fade-up-1': 'fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.0s both',
+              'fade-up-2': 'fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.15s both',
+              'fade-up-3': 'fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.30s both',
+              'fade-up-4': 'fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.45s both',
+              'fade-up-5': 'fadeUp 1s cubic-bezier(0.22,1,0.36,1) 0.60s both',
+              'line-grow':  'lineGrow 1s cubic-bezier(0.22,1,0.36,1) 0.35s both',
+              'orb-drift':  'orbDrift 22s ease-in-out infinite alternate',
+              'orb-drift2': 'orbDrift2 28s ease-in-out infinite alternate',
+            },
+            keyframes: {
+              fadeUp: {
+                from: { opacity: '0', transform: 'translateY(20px)' },
+                to:   { opacity: '1', transform: 'translateY(0)' },
+              },
+              lineGrow: {
+                from: { width: '0', opacity: '0' },
+                to:   { width: '3rem', opacity: '1' },
+              },
+              orbDrift: {
+                from: { transform: 'translate(0,0) scale(1)' },
+                to:   { transform: 'translate(50px,70px) scale(1.1)' },
+              },
+              orbDrift2: {
+                from: { transform: 'translate(0,0) scale(1)' },
+                to:   { transform: 'translate(-40px,-50px) scale(1.08)' },
+              },
+            },
+          },
+        },
+      }
+    </script>
+    <link href="style.css" rel="stylesheet">
+    <!-- Theme must run before paint to avoid flash -->
+    <script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark')</script>
+  </head>
+  <body class="font-body min-h-screen overflow-hidden relative flex flex-col select-none">
+
+    <div class="grain"></div>
+
+    <!-- Ambient orbs -->
+    <div class="fixed pointer-events-none" style="width:700px;height:700px;top:-280px;left:-200px;background:radial-gradient(circle,rgba(247,186,94,0.14) 0%,transparent 65%);border-radius:50%;animation:orbDrift 22s ease-in-out infinite alternate;"></div>
+    <div class="fixed pointer-events-none" style="width:500px;height:500px;bottom:-200px;right:-140px;background:radial-gradient(circle,rgba(247,186,94,0.10) 0%,transparent 65%);border-radius:50%;animation:orbDrift2 28s ease-in-out infinite alternate;"></div>
+
+    <!-- Nav -->
+    <nav class="relative z-10 flex justify-between items-center px-10 pt-9 animate-fade-up-1">
+      <span class="font-display text-sm tracking-[0.28em] uppercase font-light" style="color:var(--muted)">Flow State</span>
+      <button class="theme-btn" onclick="toggleTheme()" title="Toggle dark mode">
+        <!-- Sun (shown in dark mode) -->
+        <svg id="iconSun" width="15" height="15" viewBox="0 0 15 15" fill="none" style="display:none">
+          <circle cx="7.5" cy="7.5" r="3" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M7.5 1v1.5M7.5 12.5V14M1 7.5h1.5M12.5 7.5H14M3.05 3.05l1.06 1.06M10.89 10.89l1.06 1.06M3.05 11.95l1.06-1.06M10.89 4.11l1.06-1.06" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <!-- Moon (shown in light mode) -->
+        <svg id="iconMoon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M12.5 9A6 6 0 0 1 5 1.5a6 6 0 1 0 7.5 7.5z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Hero -->
+    <main class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-8 -mt-8">
+
+      <p class="font-body text-[11px] tracking-[0.3em] uppercase font-light mb-7 animate-fade-up-2" style="color:var(--muted)">
+        Deep work · One session at a time
+      </p>
+
+      <h1 class="font-display font-light leading-[0.95] mb-6 animate-fade-up-3" style="font-size:clamp(60px,10vw,120px)">
+        Your time,<br>
+        <em class="italic" style="color:#f7ba5e">harmonized.</em>
+      </h1>
+
+      <!-- Divider line -->
+      <div class="h-px rounded-full mb-7 animate-line-grow" style="background:#f7ba5e;"></div>
+
+      <p class="font-body font-light text-[15px] text-muted max-w-[280px] leading-relaxed mb-10 animate-fade-up-4">
+        A quiet space to enter deep focus.<br>No noise, no distraction.
+      </p>
+
+      <a href="pomodoro.html" class="cta-btn animate-fade-up-5" id="ctaBtn">
+        <span>Begin session</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="arrow-icon">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 flex justify-between px-10 pb-8 animate-fade-up-5">
+      <span class="font-body text-[11px] opacity-40 tracking-widest" style="color:var(--muted)">© 2025</span>
+      <span class="font-body text-[11px] opacity-40 tracking-widest font-light" style="color:var(--muted)">v 1.0</span>
+    </footer>
+
+    <script src="theme.js"></script>
+  </body>
+</html>
